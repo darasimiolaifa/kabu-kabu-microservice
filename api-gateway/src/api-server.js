@@ -8,11 +8,15 @@ const PORT = process.env.PORT || 8080;
 
 const apiServer = gateway({
   middleware: [
-    cors,
-    helmet
+    cors(),
+    helmet()
   ],
   routes: [
-    
+    {
+      prefix: '/auth',
+      target: 'http://localhost:3000',
+      methods: ['GET', 'POST']
+    }
   ]
 });
 
