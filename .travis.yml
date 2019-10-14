@@ -5,12 +5,15 @@ notifications:
   email: false
 env:
   global:
-  - CC_TEST_REPORTER_ID=bb88b704d3c35b991446df360daeeb9d3db2affaa204eb689c42e5b4bb71d3c1
+    - CC_TEST_REPORTER_ID=bb88b704d3c35b991446df360daeeb9d3db2affaa204eb689c42e5b4bb71d3c1
+  matrix:
+    - TEST_DIRECTORY="api-gateway"
+    - TEST_DIRECTORY="authservice"
 before_script:
+  - cd $TEST_DIRECTORY
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
-  - cd api-gateway
   - npm install
 script:
   - npm run test
