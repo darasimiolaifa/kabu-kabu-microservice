@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "nyc --reporter=html --reporter=text mocha src/test/*.spec.js --timeout 10000 --require @babel/register --recursive --exit || true",
+    "test": "nyc --reporter=html --reporter=text mocha src/test --timeout 10000 --require @babel/register --recursive --exit || true",
+    "coverage": "nyc report --reporter=text-lcov --reporter=lcov",
     "start": "nodemon --exec babel-node ./src/index.js"
   },
   "keywords": [],
