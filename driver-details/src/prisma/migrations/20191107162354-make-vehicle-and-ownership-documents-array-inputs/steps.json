@@ -1,0 +1,17 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "stepType": "UpdateField",
+      "model": "Taxi",
+      "name": "vehicle_documents",
+      "arity": "list"
+    },
+    {
+      "stepType": "UpdateField",
+      "model": "Taxi",
+      "name": "ownership_documents",
+      "arity": "list"
+    }
+  ]
+}

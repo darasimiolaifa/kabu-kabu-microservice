@@ -1,0 +1,13 @@
+# IF THERE'S A GIT CONFLICT IN THIS FILE, DON'T SOLVE IT MANUALLY!
+# INSTEAD EXECUTE `prisma lift fix`
+# lift lockfile v1
+# Read more about conflict resolution here: TODO
+
+20191104033010-init
+20191104033228-change-car-model-column-from-model-to-car_model
+20191104135424-make-updated-at-column-nullable
+20191107135320-edit-driver-taxi-relationship
+20191107141021-edit-models
+20191107142311-add-color-and-vehicle-picture-to-taxi-model
+20191107153644-added-plate_number-to-taxi-model
+20191107162354-make-vehicle-and-ownership-documents-array-inputs

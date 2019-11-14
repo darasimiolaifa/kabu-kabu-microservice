@@ -1,0 +1,17 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "stepType": "UpdateField",
+      "model": "Driver",
+      "name": "updatedAt",
+      "arity": "optional"
+    },
+    {
+      "stepType": "UpdateField",
+      "model": "Taxi",
+      "name": "updatedAt",
+      "arity": "optional"
+    }
+  ]
+}

@@ -13,8 +13,14 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^3.0.6",
+    "bluebird": "^3.7.1",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1"
+    "express-validator": "^6.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "redis": "^2.8.0",
+    "amqplib": "^0.5.5",
+    "death": "^1.1.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.2",
@@ -47,10 +53,6 @@
       "**/node_modules/**",
       "**/coverage/**",
       "**/.nyc_output/**",
-      "**/src/utils/emailTemplates/**",
-      "**src/database/migrations/**",
-      "**src/database/seeders/**",
-      "**src/models/**",
       "**src/test/**"
     ]
   }

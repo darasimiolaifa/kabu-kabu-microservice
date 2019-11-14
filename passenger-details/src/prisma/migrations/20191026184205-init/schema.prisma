@@ -1,0 +1,27 @@
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://postgres:holiness86@localhost:5432/kabu_kabu_passenger"
+}
+
+generator photon {
+  provider = "photonjs"
+}
+
+model Passenger {
+  id    String  @default(cuid()) @id @unique
+  email String  @unique
+  firstName  String
+  lastName  String
+  status  String
+  createdAt DateTime
+  trips Int?
+}
+// model Post {
+//   id        String   @default(cuid()) @id @unique
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+//   published Boolean
+//   title     String
+//   content   String?
+//   author    User?
+// }

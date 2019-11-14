@@ -9,10 +9,11 @@ matrix:
   include:
     - env: TEST_DIRECTORY="api-gateway"
     - env: TEST_DIRECTORY="authservice"
+    - env: TEST_DIRECTORY="notifications"
     - env: TEST_DIRECTORY="events-database"
       services:
         - mongodb
-      before_script:      
+      before_script:
         - cd $TEST_DIRECTORY
         - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         - chmod +x ./cc-test-reporter
@@ -25,7 +26,31 @@ matrix:
         - sudo mongod --fork --logpath /var/log/mongodb/mongod.log --replSet="rs"
         - sleep 20
         - mongo --eval "rs.initiate()"
-        - sleep 15    
+        - sleep 15
+    - env: TEST_DIRECTORY="driver-details"
+      services:
+        - postgresql
+      before_script:      
+        - cd $TEST_DIRECTORY
+        - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+        - chmod +x ./cc-test-reporter
+        - ./cc-test-reporter before-build
+        - psql -c 'CREATE DATABASE kabu_kabu_driver;' -U postgres
+        - npm install
+        - npm run migrate
+        - npm run generate
+    - env: TEST_DIRECTORY="passenger-details"
+      services:
+        - postgresql
+      before_script:      
+        - cd $TEST_DIRECTORY
+        - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+        - chmod +x ./cc-test-reporter
+        - ./cc-test-reporter before-build
+        - psql -c 'CREATE DATABASE kabu_kabu_passenger;' -U postgres
+        - npm install
+        - npm run migrate
+        - npm run generate
 before_script:
   - cd $TEST_DIRECTORY
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter

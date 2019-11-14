@@ -1,9 +1,13 @@
 import express from 'express';
+import addRoutes from './routes';
 
 const app = express();
 const PORT = 3000;
 
-app.get('/', (req, res) => res.status(403).json({ status: 403, message: 'You cannot query this route'}));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+addRoutes(app);
 
 app.listen(PORT, () => console.log(`Auth service lisening at port ${PORT}`));
 

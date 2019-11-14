@@ -1,11 +1,8 @@
-import { Router } from 'express';
-import EventsController from './controller';
+import commandHandlers from './commandHandlers';
+import mq from './rabbitmq';
 
-const router = Router();
+const { createUserHandler } = commandHandlers;
 
-router
-  .get('/events/:aggregatorId', EventsController.getEvent)
-  .post('/events', EventsController.createEvent);
-  
-  export default router;
-  
+export default (app) => {
+  mq.consume('kabu-kabu', 'CREATE', 'COMMAND_CREATE_USER', (message) => createUserHandler(message));
+}
