@@ -1,0 +1,14 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "stepType": "UpdateField",
+      "model": "Passenger",
+      "name": "trips",
+      "arity": "required",
+      "default": {
+        "Int": 0
+      }
+    }
+  ]
+}

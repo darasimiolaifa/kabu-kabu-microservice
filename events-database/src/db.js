@@ -1,6 +1,10 @@
+import 'dotenv/config';
 import { MongoClient } from 'mongodb';
+import dbEventHandler from './dbEventHandler';
 
-const dburl = 'mongodb://localhost:27017/?replicaSet=rs';
+const dburl = process.env.DB_URL;
+const databaseName = 'kabu-kabu-events';
+
 const client = new MongoClient(
   dburl,
   {
@@ -9,16 +13,25 @@ const client = new MongoClient(
   }
 );
 
+client.connect().then((connection, error) => {
+  const collection = connection.db(databaseName).collection('events');
+  const changeStreams = collection.watch();
+  changeStreams.on('change', async ({ fullDocument, operationType }) => {
+    if(operationType === 'insert') {
+      await dbEventHandler(fullDocument);
+    }
+  });
+});
+
 const executeDbQuery = async (query) => {
   try {
     const connection = await client.connect();
-    console.log('Connected to database server.')
-    const db = connection.db('kabu-kabu-events');
-    const results = query(db);
+    const db = connection.db(databaseName);
+    const results = await query(db);
     client.close();
-    console.log('Connection to database server closed.')
     return results; 
   } catch (error) {
+    client.close();
     return { error };
   }
 };
@@ -28,8 +41,8 @@ export const insertEvent = (event) => {
   return executeDbQuery(insertQuery);
 }
 
-export const findEvent = (aggregatorId) => {
-  const findQuery = (db) => db.collection('events').find({ aggregatorId }).toArray();
+export const findEvent = (condition) => {
+  const findQuery = (db) => db.collection('events').find(condition).toArray();
   return executeDbQuery(findQuery);
 }
 

@@ -1,0 +1,46 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "stepType": "UpdateField",
+      "model": "Driver",
+      "name": "taxi",
+      "type": {
+        "Relation": {
+          "to": "Taxi",
+          "to_fields": [],
+          "name": "DriverToTaxi",
+          "on_delete": "None"
+        }
+      },
+      "arity": "list"
+    },
+    {
+      "stepType": "UpdateField",
+      "model": "Taxi",
+      "name": "driver",
+      "type": {
+        "Relation": {
+          "to": "Driver",
+          "to_fields": [
+            "id"
+          ],
+          "name": "DriverToTaxi",
+          "on_delete": "None"
+        }
+      }
+    },
+    {
+      "stepType": "UpdateField",
+      "model": "Taxi",
+      "name": "vehicle_documents",
+      "arity": "required"
+    },
+    {
+      "stepType": "UpdateField",
+      "model": "Taxi",
+      "name": "ownership_documents",
+      "arity": "required"
+    }
+  ]
+}

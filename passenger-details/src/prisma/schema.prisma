@@ -1,0 +1,20 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("PASSENGER_POSTGRESQL_URL")
+}
+
+generator photon {
+  provider = "photonjs"
+}
+
+model Passenger {
+  id    String  @default(cuid()) @id @unique
+  email String  @unique
+  firstName  String
+  lastName  String
+  status  String
+  phone_number  String
+  createdAt DateTime
+  updatedAt DateTime?
+  trips Int @default(0)
+}
